@@ -6,6 +6,7 @@
     <title>pocket portals fhnw</title>
     <script src="./lib/hydra-synth.js"></script>
     <script src="./lib/gyro.js"></script>
+    <script src="./lib/p5.js"></script>
     <styLe>
         html,
         body {
@@ -26,8 +27,36 @@
     <script type="module">
         const h = new Hydra()
 
-        osc(100, 0.1, 0.2).out()
-       shape().scrollX(() => gyro.beta/4).scrollY(() => gyro.gamma/4).out()
+        myLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm','n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+p1 = new P5
+
+p1.frameRate(1);
+p1.mousePressed = ()=> {
+p1.clear();
+p1.textSize(45);
+p1.fill('white');
+p1.text(p1.random(myLetters), p1.mouseX, p1.mouseY);
+}
+
+p1.hide()
+
+s0.init({src:p1.canvas})
+
+osc(2, 0.001, .0001)
+	.kaleid(1)
+.diff(osc(1))
+	.color(-2, -0.6, 3)
+.layer(s0).scrollX(() => gyro.beta/4).scrollY(() => gyro.gamma/4).out()
+.modulatePixelate(noise(800),666,89).scale(2, 1)
+//.modulate(o0, () => mouse.x * 0.00034)
+	.scale(1)
+
+
+.out(o0)
+
+
+    
         gyro.requestPermissions(document.getElementById('gyro-button'))
         gyro.show()
     </script>
