@@ -27,8 +27,11 @@
         const h = new Hydra()
 
         osc(100, 0.1, 0.2).out()
+       shape().scrollX(() => gyro.beta/4).scrollY(() => gyro.gamma/4).out()
+        gyro.requestPermissions(document.getElementById('gyro-button'))
+        gyro.show()
     </script>
-    <button id="gryo-button">activate gyroscope</button>
+    <button id="gyro-button">activate gyroscope</button>
 </body>
 
 </html>
