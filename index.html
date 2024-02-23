@@ -66,6 +66,9 @@
 
         function draw() {
             frameRate(1);
+            if(frameCount%10==0){
+                clear()
+            }
             mousePressed = () => {
                 textSize(45);
                 fill('white');
