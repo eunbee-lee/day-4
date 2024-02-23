@@ -125,7 +125,10 @@ src(o0)
 		
 		.scrollX(() => 0.5 - mouse.x / width)
 		.scrollY(() => 0.5 - mouse.y / height)
-.layer(src(s0))
+.layer(src(s0)
+    .scrollX(() => gyro.beta / 4)
+	.scrollY(() => gyro.gamma / 4)
+    )
 
 
 //.modulateRepeatX(osc(1), 5.0, ({time}) => Math.sin(time) * 5)
@@ -135,6 +138,12 @@ src(o0)
 	.scale(1)
     .blend(src(o0))
 .out(o0)
+
+
+// src(s0)
+//     .scrollX(() => 0.5 - mouse.x / width)
+//     .scrollY(() => 0.5 - mouse.y / height)
+//     .out(o0)
 
 //.scale(({time})=>Math.sin(time*1)*0.5+1)
 //({time})=>(time%360)/2
