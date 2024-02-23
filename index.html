@@ -116,7 +116,7 @@
             .modulate(osc(40), 0.001)
 
             .modulatePixelate(noise((888) / 2), 666, 89).scale(2, 1)
-            .modulate(o0, () => mouseX * 0.00034).modulateScale(noise(1, .7), .8).luma([0, 0.5])
+            .modulate(o0, () => mouseX * 0.00034).modulateScale(noise(1, .7), .8).luma([0, 0.3])
             // .layer(gradient(0.2))
            // .blend(shape(({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2))
             .colorama(3)
