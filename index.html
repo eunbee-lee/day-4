@@ -143,18 +143,18 @@
 
         gyro.requestPermissions(document.getElementById('gyro-button'))
 
-                 .scrollY(() => {
-          if(touches.length > 2 && touches.length <= 3) return -0.01
-          return 0.00
-        })
-         .scrollX(() => {
-          if(touches.length > 1 && touches.length <= 2) return -0.01
-          return 0.00
-        })
-          .modulate(o0, () => {
-          if(touches.length > 3) return 0.010
-          return 0.00
-        }).layer(src(s0)).out()
+        //          .scrollY(() => {
+        //   if(touches.length > 2 && touches.length <= 3) return -0.01
+        //   return 0.00
+        // })
+        //  .scrollX(() => {
+        //   if(touches.length > 1 && touches.length <= 2) return -0.01
+        //   return 0.00
+        // })
+        //   .modulate(o0, () => {
+        //   if(touches.length > 3) return 0.010
+        //   return 0.00
+        // }).layer(src(s0)).out()
         
     </script>
     <canvas id="hydra-canvas"></canvas>
