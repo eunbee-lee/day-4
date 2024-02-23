@@ -10,6 +10,7 @@
     <title>FUNTHINGS</title>
     <script src="./lib/hydra-synth.js"></script>
     <script src="./lib/gyro.js"></script>
+    <script src="./lib/gyro-v2.js"></script>
     <script src="./lib/p5.js"></script>
     <styLe>
         html,
@@ -30,6 +31,17 @@
             top: 0px;
             left: 0px;
         }
+
+        #gyro-button {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: none;
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      background-image: url("cover.png");
+    }
     </styLe>
 </head>
 
@@ -132,7 +144,8 @@ osc(2, 0.001, .0001)
 gyro.requestPermissions(document.getElementById('gyro-button'))
         gyro.show()
     </script>
-        <button id="gyro-button">activate gyroscope</button>
+       <canvas id="hydra-canvas"></canvas>
+       <button id="gyro-button">touch to begin</button>
 
         
 
