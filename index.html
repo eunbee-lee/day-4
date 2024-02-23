@@ -1,5 +1,3 @@
-//multiple fingers
-
 
 <!doctype html>
 <html lang="en">
@@ -9,8 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>FUNTHINGS</title>
     <script src="./lib/hydra-synth.js"></script>
-        <script src="./lib/gyro-v2.js"></script>
+    <script src="./lib/gyro-v2.js"></script>
     <script src="./lib/p5.js"></script>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icons/192x192.png">
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+
     <styLe>
         html,
         body {
@@ -51,6 +57,7 @@
 <body>
     <button id="gyro-button">touch to begin</button>
     <canvas id="p5-canvas"></canvas>
+    <canvas id="hydra-canvas"></canvas>
 
     <script>
         // p5 sketch goes here
@@ -58,7 +65,7 @@
         p5Canvas.style.opacity = 0
 
         //  var colors = [color(255, 0, 0, 255), color(0, 255, 0, 255), color(0, 0, 255, 255), color(255, 255, 0, 255), color(0, 255, 255, 255)]
-        var myLetters = ['🔥', '🦦', '❤️', '🌼', '🍀', '💭', '🌀', '🐶', '🆒', '🔶', '❄️', '⛄️', '🌫️']
+        var myLetters = ['🔥', '🦦', '❤️', '🌼', '🍀', '💭', '🌀', '🐶', '🆒', '🔶', '❄️', '⛄️', '🌫️', '🌈']
 
         function setup() {
             createCanvas(window.innerWidth, window.innerHeight, p5Canvas)
@@ -66,34 +73,34 @@
 
         function draw() {
             frameRate(1);
-            if(frameCount%10==0){
+            if (frameCount % 10 == 0) {
                 clear()
             }
             mousePressed = () => {
                 textSize(45);
                 fill('white');
                 text(random(myLetters), mouseX, mouseY)
-            
+
             }
 
             if (touches.length > 0) {
                 for (var i = 0; i < touches.length; i++) {
                     // One color per finger
                     text(myLetters[i])
-                    // // Draw a circle at each finger
-                    // text(myLetters[i].x, myLetters[i].y, random(100), random(100));
-                    .scrollY(() => {
-          if(touches.length > 2 && touches.length <= 3) return -0.01
-          return 0.00
-        })
-         .scrollX(() => {
-          if(touches.length > 1 && touches.length <= 2) return -0.01
-          return 0.00
-        })
-          .modulate(o0, () => {
-          if(touches.length > 3) return 0.010
-          return 0.00
-        }).layer(src(s0)).out()
+                        // // Draw a circle at each finger
+                        // text(myLetters[i].x, myLetters[i].y, random(100), random(100));
+                        .scrollY(() => {
+                            if (touches.length > 2 && touches.length <= 3) return -0.01
+                            return 0.00
+                        })
+                        .scrollX(() => {
+                            if (touches.length > 1 && touches.length <= 2) return -0.01
+                            return 0.00
+                        })
+                        .modulate(o0, () => {
+                            if (touches.length > 3) return 0.010
+                            return 0.00
+                        }).layer(src(s0)).out()
                 }
             } else {
                 // clear(({time})=>(time%10000)*0);
@@ -110,9 +117,6 @@
         const h = new Hydra()
         s0.init({ src: p5Canvas })
 
-
-
-
         src(o0)
             //.scale(1, 1.01, 1.01, 0.5)
             //	.brightness(-0.002)
@@ -121,14 +125,14 @@
             .modulatePixelate(noise((888) / 2), 666, 89).scale(2, 1)
             .modulate(o0, () => mouseX * 0.00034).modulateScale(noise(1, .7), .8).luma([0, 0.3])
             // .layer(gradient(0.2))
-           // .blend(shape(({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2))
+            // .blend(shape(({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2))
             .colorama(3)
 
             .scrollX(() => mouse.x / width)
             .scrollY(() => mouse.y / height)
             .layer(src(s0)
-                .scrollX(() => gyro.beta /5)
-                .scrollY(() => gyro.gamma/5)
+                .scrollX(() => gyro.beta / 5)
+                .scrollY(() => gyro.gamma / 5)
             )
 
 
@@ -158,8 +162,8 @@
 
         gyro.requestPermissions(document.getElementById('gyro-button'))
 
- 
-        
+
+
     </script>
     <canvas id="hydra-canvas"></canvas>
 
