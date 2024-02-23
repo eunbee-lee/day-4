@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>FUNTHINGS</title>
     <script src="./lib/hydra-synth.js"></script>
-    <script src="./lib/gyro.js"></script>
     <script src="./lib/gyro-v2.js"></script>
     <script src="./lib/p5.js"></script>
     <styLe>
@@ -122,11 +121,11 @@
             .blend(shape(({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2))
             .colorama(3)
 
-            .scrollX(() => 0.5 - mouse.x / width)
-            .scrollY(() => 0.5 - mouse.y / height)
+            .scrollX(() => mouse.x / width)
+            .scrollY(() => mouse.y / height)
             .layer(src(s0)
-                .scrollX(() => gyro.beta /10)
-                .scrollY(() => gyro.gamma/10)
+                .scrollX(() => gyro.beta /5)
+                .scrollY(() => gyro.gamma/5)
             )
 
 
@@ -155,7 +154,7 @@
 
 
         gyro.requestPermissions(document.getElementById('gyro-button'))
-        gyro.show()
+      //  gyro.show()
     </script>
     <canvas id="hydra-canvas"></canvas>
 
