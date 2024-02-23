@@ -67,15 +67,15 @@ frameRate(1);
 mousePressed = ()=> {
 textSize(45);
 fill('white');
-text(random(myLetters), mouseX, mouseY).rotateX( gyro.beta/2).rotateY( -gyro.gamma/2);
+text(random(myLetters), mouseX, mouseY)
 }
 
 if (touches.length > 0) {
 		for (var i = 0; i < touches.length; i++) {
 			// One color per finger
-			text(myLetters[i])
+			text(myLetters[i]).scrollX(() => gyro.beta / 4).scrollY(() => gyro.gamma / 4).out()
 			// // Draw a circle at each finger
-			text(myLetters[i].x, myLetters[i].y, 50, 40);
+			text(myLetters[i].x, myLetters[i].y, 40, 40);
 		}
 	} else {
     
@@ -93,7 +93,7 @@ if (touches.length > 0) {
         
          s0.init({ src: p5Canvas })
 
-         src(o0)
+         
 //  .scrollY(() => {
 //   if(touches.length > 2 && touches.length <= 3) return -0.01
 //   return 0.00
@@ -113,14 +113,14 @@ src(o0)
 //	.brightness(-0.002)
 	.modulate(osc(40), 0.001)
 
-.modulatePixelate(noise((888)/2),666,89).scale(2,1)
+.modulatePixelate(noise((500)/2),666,89).scale(2,1)
 .modulate(o0, () => mouseX * 0.00034).modulateScale(noise(2, .7), .8)
 	// .layer(gradient(0.2))
     .blend(shape(({time})=>(time%360)/2, ({time})=>(time%360)/2, ({time})=>(time%360)/2))
-		.colorama(4)
+		.colorama(3)
 		
-		.scrollX(() => 0.5 - mouse.x / width)
-		.scrollY(() => 0.5 - mouse.y / height)
+		.scrollX(() => gyro.beta / 4)
+		.scrollY(() => gyro.gamma/ 4)
 .layer(src(s0))
 
 

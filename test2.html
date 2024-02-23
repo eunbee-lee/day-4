@@ -42,9 +42,7 @@
       background-size: cover;
       background-position: center;
       background-image: url("cover.png");
-      top:0px;
-      left:0px;
-      z-index: 200;
+      
     } 
     </styLe>
 </head>
@@ -74,6 +72,7 @@
             if (touches.length > 0) {
                 for (var i = 0; i < touches.length; i++) {
                     // One color per finger
+                    text(myLetters[i])
                     text(myLetters[i], touches[i].x, touches[i].y);
                     // // Draw a circle at each finger
                     // text(myLetters[i].x, myLetters[i].y, 40, 40);
@@ -95,25 +94,25 @@
         s0.init({ src: p5Canvas })
 
         src(o0)
-        //  .scrollY(() => {
-        //   if(touches.length > 2 && touches.length <= 3) return -0.01
-        //   return 0.00
-        // })
-        //  .scrollX(() => {
-        //   if(touches.length > 1 && touches.length <= 2) return -0.01
-        //   return 0.00
-        // })
-        //   .modulate(o0, () => {
-        //   if(touches.length > 3) return 0.010
-        //   return 0.00
-        // }).layer(src(s0)).out()
+         .scrollY(() => {
+          if(touches.length > 2 && touches.length <= 3) return -0.01
+          return 0.00
+        })
+         .scrollX(() => {
+          if(touches.length > 1 && touches.length <= 2) return -0.01
+          return 0.00
+        })
+          .modulate(o0, () => {
+          if(touches.length > 3) return 0.010
+          return 0.00
+        }).layer(src(s0)).out()
 
 
         osc(2, 0.001, .0001)
             .kaleid(1)
             .diff(osc(1))
             .color(-2, -0.6, 3)//.brightness(()=>Math.random()*0.15)
-            .layer(src(s0).luma())
+            .layer(src(s0))
           
             .scrollX(() => {
                 if (touches.length > 1 && touches.length <= 2) return -0.01
@@ -126,7 +125,8 @@
 
             .modulatePixelate(noise((888) / 2), 666, 89).scale(2, 1)
             .modulate(o0, () => mouseX * 0.00034).modulateScale(noise(2, .7), .8)
-            //.modulateRepeatX(osc(1), 5.0, ({time}) => Math.sin(time) * 5)
+            .blend(shape(({time})=>(time%360)/2, ({time})=>(time%360)/2, ({time})=>(time%360)/2))
+            // .modulateRepeatX(osc(1), 5.0, ({time}) => Math.sin(time) * 5)
             //.modulateScrollX(osc(({time})=>(time%360)/2),- 0.5,0).luma(.3)
             //.colorama(-0.000002)
             //.mask(shape(0.2, 1))
