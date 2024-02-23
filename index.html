@@ -28,27 +28,13 @@
     <script type="module">
         const h = new Hydra()
 
-        myLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm','n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-p1 = new P5
-
-p1.frameRate(1);
-p1.mousePressed = ()=> {
-p1.clear();
-p1.textSize(45);
-p1.fill('white');
-p1.text(p1.random(myLetters), p1.mouseX, p1.mouseY);
-}
-
-p1.hide()
-
-s0.init({src:p1.canvas})
 
 osc(2, 0.001, .0001)
-	.kaleid(1)
-.diff(osc(1))
+	.kaleid(1).scrollX(() => gyro.beta/4).scrollY(() => gyro.gamma/4)
+.diff(osc(2))
 	.color(-2, -0.6, 3)
-.layer(s0).scrollX(() => gyro.beta/4).scrollY(() => gyro.gamma/4).out()
+.layer(s0)
 .modulatePixelate(noise(800),666,89).scale(2, 1)
 //.modulate(o0, () => mouse.x * 0.00034)
 	.scale(1)
@@ -56,7 +42,8 @@ osc(2, 0.001, .0001)
 
 .out(o0)
 
-
+document.querySelector("meta[name=viewport]")
+	.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
     
         gyro.requestPermissions(document.getElementById('gyro-button'))
         gyro.show()

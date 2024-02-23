@@ -1,0 +1,143 @@
+//multiple fingers 
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>OLIVIA s beautiful page</title>
+    <script src="./lib/hydra-synth.js"></script>
+    <script src="./lib/gyro.js"></script>
+    <script src="./lib/p5.js"></script>
+    <styLe>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+
+        #p5-canvas {
+            z-index: 100;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </styLe>
+</head>
+
+<body>
+    <canvas id="p5-canvas"></canvas>
+    <script>    
+        // p5 sketch goes here
+        const p5Canvas = document.getElementById('p5-canvas')
+        p5Canvas.style.opacity = 0
+        function setup() {
+            createCanvas(window.innerWidth, window.innerHeight, p5Canvas)
+        }
+        var myLetters = ['🤓', '🦦', '❤️', '🌼', '🍀']
+      //  var colors = [color(255, 0, 0, 255), color(0, 255, 0, 255), color(0, 0, 255, 255), color(255, 255, 0, 255), color(0, 255, 255, 255)]
+
+        function draw() {
+frameRate(1);
+mousePressed = ()=> {
+textSize(45);
+ fill('white');
+  text(random(myLetters), mouseX, mouseY);
+}
+
+if (touches.length > 0) {
+		for (var i = 0; i < touches.length; i++) {
+			// One color per finger
+			text(myLetters[i]);
+			// Draw a circle at each finger
+			text(myLetters[i].x, myLetters[i].y, 40, 40);
+		}
+	} else {
+    
+         text(mouseX/5, mouseY/5, 255, 100)
+		 text(mouseX, mouseY, 30, 15)
+	}
+//clear();
+//background(0, 55)
+
+
+ }
+
+         // hydra sketch 
+         const h = new Hydra()
+        
+         s0.init({ src: p5Canvas })
+
+         src(o0)
+//  .scrollY(() => {
+//   if(touches.length > 2 && touches.length <= 3) return -0.01
+//   return 0.00
+// })
+//  .scrollX(() => {
+//   if(touches.length > 1 && touches.length <= 2) return -0.01
+//   return 0.00
+// })
+//   .modulate(o0, () => {
+//   if(touches.length > 3) return 0.010
+//   return 0.00
+// }).layer(src(s0)).out()
+
+
+osc(2, 0.001, .0001)
+	.kaleid(1)
+.diff(osc(1))
+	.color(-2, -0.6, 3)//.brightness(()=>Math.random()*0.15)
+.layer(src(s0).luma())
+.scrollY(() => {
+  if(touches.length > 2 && touches.length <= 3) return -0.01
+  return 0.00
+})
+ .scrollX(() => {
+  if(touches.length > 1 && touches.length <= 2) return -0.01
+  return 0.00
+})
+  .modulate(o0, () => {
+  if(touches.length > 3) return 0.010
+  return 0.00
+}).layer(src(s0))
+
+.modulatePixelate(noise((888)/2),666,89).scale(2,1)
+.modulate(o0, () => mouseX * 0.00034).modulateScale(noise(2, .7), .8)
+//.modulateRepeatX(osc(1), 5.0, ({time}) => Math.sin(time) * 5)
+//.modulateScrollX(osc(({time})=>(time%360)/2),- 0.5,0).luma(.3)
+//.colorama(-0.000002)
+//.mask(shape(0.2, 1))
+	.scale(1)
+    .blend(src(o0))
+.out(o0)
+
+//.scale(({time})=>Math.sin(time*1)*0.5+1)
+//({time})=>(time%360)/2
+//({time})=>(time%360)/2
+//scale(() => a.fft[0])%1)
+//original noise 888
+//.scale(() => a.fft[0]/100000)
+
+
+
+
+gyro.requestPermissions(document.getElementById('gyro-button'))
+        gyro.show()
+    </script>
+        <button id="gyro-button">activate gyroscope</button>
+
+        
+
+</script>
+
+</body>
+
+</html>

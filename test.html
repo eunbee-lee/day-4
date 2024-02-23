@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=false" />
+    <title>OLIVIA s beautiful page</title>
+    <script src="./lib/hydra-synth.js"></script>
+    <script src="./lib/gyro.js"></script>
+    <script src="./lib/p5.js"></script>
+    <styLe>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+
+        #p5-canvas {
+            z-index: 100;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </styLe>
+</head>
+
+<body>
+    <canvas id="p5-canvas"></canvas>
+    <script>
+        // p5 sketch goes here
+        const p5Canvas = document.getElementById('p5-canvas')
+        p5Canvas.style.opacity = 0
+        function setup() {
+            createCanvas(window.innerWidth, window.innerHeight, p5Canvas)
+        }
+        var myLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+        function draw() {
+
+
+
+            frameRate(1);
+            mousePressed = () => {
+                textSize(45);
+                fill('white');
+                text(random(myLetters), mouseX, mouseY);
+            }
+            //clear();
+            //background(0, 55)
+
+
+        }
+
+        // hydra sketch 
+        const h = new Hydra()
+
+        s0.init({ src: p5Canvas })
+
+        osc(2, 0.001, .0001)
+            .kaleid(1)
+            .diff(osc(1))
+            .color(-2, -0.6, 3)
+            .layer(src(s0).luma(.9, .1))
+            .modulatePixelate(noise(800), 666, 89).scale(2, 1)
+            .modulate(o0, () => mouseX * 0.00034)
+            .blend(src(o0).scale(() => a.fft[-.3]))
+
+            .scale(1)
+            .out(o0)
+
+        document.querySelector("meta[name=viewport]")
+            .setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+
+        gyro.requestPermissions(document.getElementById('gyro-button'))
+        gyro.show()
+
+    </script>
+    <button id="gyro-button">activate gyroscope</button>
+
+
+    </script>
+
+</body>
+
+</html>
+
+<!-- solid(10 ,0.2, 0.1)
+	.blend(src(o0).scale(() => a.fft[0]))
+    //.add(text(str))
+	.diff(strokeText(str).modulateScale(noise(3, 2), .8))
+	.out() -->
