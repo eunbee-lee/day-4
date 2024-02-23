@@ -121,7 +121,7 @@
             .blend(shape(({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2))
             .colorama(3)
 
-            scrollX(() => mouse.x*({time})=>Math.sin(time*1)*0.5+1)
+            scrollX(() => 0.5 - mouse.x / width)
             .scrollY(() => mouse.y / height)
             .layer(src(s0)
                 .scrollX(() => gyro.beta /5)
