@@ -106,7 +106,7 @@
             .modulatePixelate(noise((888) / 2), 666, 89).scale(2, 1)
             .modulate(o0, () => mouseX * 0.00034).modulateScale(noise(1, .7), .8)
             // .layer(gradient(0.2))
-            .blend(shape(({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2))
+           // .blend(shape(({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2, ({ time }) => (time % 360) / 2))
             .colorama(3)
 
             .scrollX(() => mouse.x / width)
