@@ -56,26 +56,31 @@
         }
         var myLetters = ['🤓', '🦦', '❤️', '🌼', '🍀']
       //  var colors = [color(255, 0, 0, 255), color(0, 255, 0, 255), color(0, 0, 255, 255), color(255, 255, 0, 255), color(0, 255, 255, 255)]
+      var myLetters = ['🔥', '🦦', '❤️', '🌼', '🍀','💭', '🌀', '🐶', '🆒', '🔶', '❄️', '⛄️', '🌫️' ]
+
+      function setup() {
+            createCanvas(window.innerWidth, window.innerHeight, p5Canvas)
+        }
 
         function draw() {
 frameRate(1);
 mousePressed = ()=> {
 textSize(45);
 fill('white');
-text(random(myLetters), mouseX, mouseY);
+text(random(myLetters), mouseX, mouseY).rotateX( gyro.beta/2).rotateY( -gyro.gamma/2);
 }
 
 if (touches.length > 0) {
 		for (var i = 0; i < touches.length; i++) {
 			// One color per finger
-			text(myLetters[i]);
+			text(myLetters[i])
 			// // Draw a circle at each finger
-			// text(myLetters[i].x, myLetters[i].y, 40, 40);
+			text(myLetters[i].x, myLetters[i].y, 40, 40);
 		}
 	} else {
     
-        //  text(mouseX/5, mouseY/5, 255, 100)
-		//  text(mouseX, mouseY, 30, 15)
+        // text(mouseX/5, mouseY/5, 255, 100)
+		// text(mouseX, mouseY, 30, 15)
 	}
 //clear();
 //background(0, 55)
