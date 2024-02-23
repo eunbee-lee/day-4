@@ -31,7 +31,7 @@
             top: 0px;
             left: 0px;
         }
-/* 
+
         #gyro-button {
       position: absolute;
       width: 100%;
@@ -41,11 +41,16 @@
       background-size: cover;
       background-position: center;
       background-image: url("cover.png");
-    } */
+      top: 0px;
+      left: 0px;
+      z-index: 200;
+      border: none;
+    }
     </styLe>
 </head>
 
 <body>
+    <button id="gyro-button">touch to begin</button>
     <canvas id="p5-canvas"></canvas>
     <script>    
         // p5 sketch goes here
@@ -73,7 +78,7 @@ text(random(myLetters), mouseX, mouseY)
 if (touches.length > 0) {
 		for (var i = 0; i < touches.length; i++) {
 			// One color per finger
-			text(myLetters[i]).scrollX(() => gyro.beta / 4).scrollY(() => gyro.gamma / 4).out()
+			text(myLetters[i])
 			// // Draw a circle at each finger
 			text(myLetters[i].x, myLetters[i].y, 40, 40);
 		}
@@ -113,14 +118,14 @@ src(o0)
 //	.brightness(-0.002)
 	.modulate(osc(40), 0.001)
 
-.modulatePixelate(noise((500)/2),666,89).scale(2,1)
-.modulate(o0, () => mouseX * 0.00034).modulateScale(noise(2, .7), .8)
+.modulatePixelate(noise((888)/2),666,89).scale(2,1)
+.modulate(o0, () => mouseX * 0.00034).modulateScale(noise(1, .7), .8)
 	// .layer(gradient(0.2))
     .blend(shape(({time})=>(time%360)/2, ({time})=>(time%360)/2, ({time})=>(time%360)/2))
 		.colorama(3)
 		
-		.scrollX(() => gyro.beta / 4)
-		.scrollY(() => gyro.gamma/ 4)
+		.scrollX(() => 0.5 - mouse.x / width)
+		.scrollY(() => 0.5 - mouse.y / height)
 .layer(src(s0))
 
 
@@ -146,7 +151,7 @@ gyro.requestPermissions(document.getElementById('gyro-button'))
         gyro.show()
     </script>
        <canvas id="hydra-canvas"></canvas>
-       <button id="gyro-button">touch to begin</button>
+
 
         
 
