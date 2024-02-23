@@ -1,13 +1,17 @@
+//multiple fingers 
+
+
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=false" />
-    <title>pocket portals fhnw</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>FUNTHINGS</title>
     <script src="./lib/hydra-synth.js"></script>
     <script src="./lib/gyro.js"></script>
+    <script src="./lib/gyro-v2.js"></script>
     <script src="./lib/p5.js"></script>
-    <script src="./lib/p5.min.js"></script>
     <styLe>
         html,
         body {
@@ -15,40 +19,144 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            background: black;
+          background: black;
+        }
+
+        #p5-canvas {
+            z-index: 100;
         }
 
         canvas {
-            display: block;
+            position: absolute;
+            top: 0px;
+            left: 0px;
         }
+
+        #gyro-button {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: none;
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      background-image: url("cover.png");
+      top: 0px;
+      left: 0px;
+      z-index: 200;
+      border: none;
+    }
     </styLe>
 </head>
 
 <body>
-    <script type="module">
-        const h = new Hydra()
+    <button id="gyro-button">touch to begin</button>
+    <canvas id="p5-canvas"></canvas>
+    <script>    
+        // p5 sketch goes here
+        const p5Canvas = document.getElementById('p5-canvas')
+        p5Canvas.style.opacity = 0
+        function setup() {
+            createCanvas(window.innerWidth, window.innerHeight, p5Canvas)
+        }
+        var myLetters = ['🤓', '🦦', '❤️', '🌼', '🍀']
+      //  var colors = [color(255, 0, 0, 255), color(0, 255, 0, 255), color(0, 0, 255, 255), color(255, 255, 0, 255), color(0, 255, 255, 255)]
+      var myLetters = ['🔥', '🦦', '❤️', '🌼', '🍀','💭', '🌀', '🐶', '🆒', '🔶', '❄️', '⛄️', '🌫️' ]
+
+      function setup() {
+            createCanvas(window.innerWidth, window.innerHeight, p5Canvas)
+        }
+
+        function draw() {
+frameRate(1);
+mousePressed = ()=> {
+textSize(45);
+fill('white');
+text(random(myLetters), mouseX, mouseY)
+}
+
+if (touches.length > 0) {
+		for (var i = 0; i < touches.length; i++) {
+			// One color per finger
+			text(myLetters[i])
+			// // Draw a circle at each finger
+			text(myLetters[i].x, myLetters[i].y, 40, 40);
+		}
+	} else {
+    
+        // text(mouseX/5, mouseY/5, 255, 100)
+		// text(mouseX, mouseY, 30, 15)
+	}
+//clear();
+//background(0, 55)
 
 
+ }
 
-osc(2, 0.001, .0001)
-	.kaleid(1).scrollX(() => gyro.beta/4).scrollY(() => gyro.gamma/4)
-.diff(osc(2))
-	.color(-2, -0.6, 3)
-.layer(s0)
-.modulatePixelate(noise(800),666,89).scale(2, 1)
-//.modulate(o0, () => mouse.x * 0.00034)
+         // hydra sketch 
+         const h = new Hydra()
+        
+         s0.init({ src: p5Canvas })
+
+         
+//  .scrollY(() => {
+//   if(touches.length > 2 && touches.length <= 3) return -0.01
+//   return 0.00
+// })
+//  .scrollX(() => {
+//   if(touches.length > 1 && touches.length <= 2) return -0.01
+//   return 0.00
+// })
+//   .modulate(o0, () => {
+//   if(touches.length > 3) return 0.010
+//   return 0.00
+// }).layer(src(s0)).out()
+
+
+src(o0)
+	//.scale(1, 1.01, 1.01, 0.5)
+//	.brightness(-0.002)
+	.modulate(osc(40), 0.001)
+
+.modulatePixelate(noise((888)/2),666,89).scale(2,1)
+.modulate(o0, () => mouseX * 0.00034).modulateScale(noise(1, .7), .8)
+	// .layer(gradient(0.2))
+    .blend(shape(({time})=>(time%360)/2, ({time})=>(time%360)/2, ({time})=>(time%360)/2))
+		.colorama(3)
+		
+		.scrollX(() => 0.5 - mouse.x / width)
+		.scrollY(() => 0.5 - mouse.y / height)
+.layer(src(s0))
+
+
+//.modulateRepeatX(osc(1), 5.0, ({time}) => Math.sin(time) * 5)
+//.modulateScrollX(osc(({time})=>(time%360)/2),- 0.5,0).luma(.3)
+//.colorama(-0.000002)
+//.mask(shape(0.2, 1))
 	.scale(1)
-
-
+    .blend(src(o0))
 .out(o0)
 
-document.querySelector("meta[name=viewport]")
-	.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
-    
-        gyro.requestPermissions(document.getElementById('gyro-button'))
+//.scale(({time})=>Math.sin(time*1)*0.5+1)
+//({time})=>(time%360)/2
+//({time})=>(time%360)/2
+//scale(() => a.fft[0])%1)
+//original noise 888
+//.scale(() => a.fft[0]/100000)
+
+
+
+
+gyro.requestPermissions(document.getElementById('gyro-button'))
         gyro.show()
     </script>
-    <button id="gyro-button">activate gyroscope</button>
+       <canvas id="hydra-canvas"></canvas>
+
+
+        
+
+</script>
+
 </body>
 
 </html>
